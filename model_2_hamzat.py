@@ -70,7 +70,7 @@ client = OpenAI(
     api_key=os.environ["OPENAI_API_KEY"],
 )
 
-"""**Step 1: Load the Dataset**"""
+# Step 1: Load the Dataset
 
 df = pd.read_csv('PCOS_data.csv')
 df.head()
@@ -100,7 +100,7 @@ for col in features:
 X = df[features]
 y = df[target_col]
 
-"""**Step 2: Split Data and Train the Full Model**"""
+# Step 2: Split Data and Train the Full Model
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 model = RandomForestClassifier(random_state=42)
@@ -114,7 +114,7 @@ print("Model Accuracy:", accuracy)
 with open('trained_model.pkl', 'wb') as f:
     pickle.dump(model, f)
 
-"""**Step 3: Compute Default Values for Each Feature**"""
+# Step 3: Compute Default Values for Each Feature
 
 default_values = {}
 for col in features:
@@ -126,7 +126,7 @@ for col in features:
 print("Computed default values for all features:")
 print(default_values)
 
-"""**Step 4: Build the Recommendation Function**"""
+# Step 4: Build the Recommendation Function
 
 # Selected actionable features for user input:
 selected_features = ['BMI', 'Weight gain(Y/N)', 'Fast food (Y/N)', 'Reg.Exercise(Y/N)']
@@ -187,7 +187,7 @@ def generate_recommendations_partial(user_input):
 
     return recommendations
 
-"""**Step 5: Streamlit Frontend**"""
+# Step 5: Streamlit Frontend
 
 st.title("Lifestyle Prediction & Recommendation System")
 st.write("Provide your details below to receive personalized lifestyle recommendations.")
